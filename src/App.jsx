@@ -165,7 +165,10 @@ const DreamsView = () => {
     { id: 3, icon: "🎨", title: "Artista", desc: "Para pintar un mundo hermoso." },
     { id: 4, icon: "💻", title: "Inventor", desc: "Para crear cosas nuevas." },
     { id: 5, icon: "👮", title: "Policía", desc: "Para proteger a los demás." },
-    { id: 6, icon: "👩‍🏫", title: "Maestro", desc: "Para enseñar a otros niños." }
+    { id: 6, icon: "👩‍🏫", title: "Maestro", desc: "Para enseñar a otros niños." },
+    { id: 7, icon: "🚒", title: "Bombero", desc: "Para salvar y ayudar en emergencias." },
+    { id: 8, icon: "⚽", title: "Futbolista", desc: "Para jugar con mucha energía y pasión." },
+    { id: 9, icon: "🌟", title: "Otro", desc: "¡Porque tú puedes ser lo que quieras!" }
   ];
 
   const handleDreamClick = (dream) => {
