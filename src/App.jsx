@@ -470,8 +470,6 @@ const LandingView = ({ setTab }) => {
       <div>
         <h1 className="text-4xl font-extrabold text-purple-800 mb-4">Lú el Búho</h1>
         <p className="text-lg text-purple-600 font-medium leading-relaxed max-w-xs mx-auto">
-          ¡Hola! Soy Lú el Búho.<br/><br/>
-          Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos.<br/><br/>
           Toca el botón para que iniciemos.
         </p>
       </div>
