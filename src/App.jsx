@@ -6,13 +6,15 @@ import {
 } from 'lucide-react';
 
 // --- Utilidad de Voz (Text-to-Speech) ---
-const speak = (text) => {
+const speak = (text, onStart, onEnd) => {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel(); // Detiene cualquier voz anterior
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'es-ES'; // Español
     utterance.rate = 0.9; // Velocidad un poco más lenta para niños
     utterance.pitch = 1.1; // Tono ligeramente más agudo/amigable
+    if (onStart) utterance.onstart = onStart;
+    if (onEnd) utterance.onend = onEnd;
     window.speechSynthesis.speak(utterance);
   }
 };
@@ -418,35 +420,55 @@ const TribeView = () => (
 
 
 // 0. Vista: Landing Page (Intro)
-const LandingView = ({ setTab }) => (
-  <div className="flex flex-col items-center justify-center min-h-[75vh] space-y-10 animate-fade-in text-center px-4">
-    <div className="relative mt-8">
-      <div className="w-56 h-56 rounded-full overflow-hidden shadow-2xl border-4 border-purple-300 mx-auto animate-bounce-slow bg-white">
-        <img src="/lu-intro.png" alt="Lú el Búho" className="w-full h-full object-cover" />
-      </div>
-      <AudioButton 
-        text="¡Bienvenidos a nuestra página de Lú el búho! Iniciemos, este es nuestro lugar seguro para que hablemos." 
-        className="absolute -bottom-2 right-2 bg-purple-100 p-3 shadow-lg" 
-        colorClass="text-purple-700 hover:bg-purple-200"
-      />
-    </div>
-    
-    <div>
-      <h1 className="text-4xl font-extrabold text-purple-800 mb-4">Lú el Búho</h1>
-      <p className="text-xl text-purple-600 font-medium leading-relaxed max-w-xs mx-auto">
-        Bienvenidos a nuestra página de Lú el búho.<br/><br/>
-        Iniciemos, este es nuestro lugar seguro para que hablemos.
-      </p>
-    </div>
+const LandingView = ({ setTab }) => {
+  const [isTalking, setIsTalking] = useState(false);
+  const welcomeText = "¡Hola! Soy Lú el Búho. Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos. ¿Estás listo para iniciar?";
 
-    <Button variant="magic" className="w-full max-w-xs py-4 text-2xl flex items-center justify-center shadow-xl" onClick={() => {
-      speak("¡Iniciemos!");
-      setTab('home');
-    }}>
-      ¡Iniciemos!
-    </Button>
-  </div>
-);
+  const playWelcome = () => {
+    speak(welcomeText, () => setIsTalking(true), () => setIsTalking(false));
+  };
+
+  useEffect(() => {
+    // Intentar reproducir automáticamente después de un pequeño retraso
+    const timer = setTimeout(() => {
+      playWelcome();
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[75vh] space-y-8 animate-fade-in text-center px-4">
+      <div className="relative mt-8 cursor-pointer" onClick={playWelcome}>
+        <div className={`w-56 h-56 rounded-full overflow-hidden border-4 border-purple-300 mx-auto bg-white transition-all duration-300 ${isTalking ? 'animate-pulse scale-105 shadow-[0_0_30px_rgba(168,85,247,0.6)]' : 'animate-bounce-slow shadow-2xl'}`}>
+          <img src="/lu-intro.png" alt="Lú el Búho" className="w-full h-full object-cover" />
+        </div>
+        <button 
+          onClick={(e) => { e.stopPropagation(); playWelcome(); }} 
+          className="absolute -bottom-2 right-2 bg-purple-100 p-4 shadow-lg rounded-full text-purple-700 hover:bg-purple-200 transition-transform active:scale-95 z-10"
+          title="Escuchar texto"
+        >
+          <Volume2 size={24} />
+        </button>
+      </div>
+      
+      <div>
+        <h1 className="text-4xl font-extrabold text-purple-800 mb-4">Lú el Búho</h1>
+        <p className="text-lg text-purple-600 font-medium leading-relaxed max-w-xs mx-auto">
+          ¡Hola! Soy Lú el Búho.<br/><br/>
+          Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos.
+        </p>
+      </div>
+
+      <Button variant="magic" className="w-full max-w-xs py-4 text-2xl flex items-center justify-center shadow-xl mt-4" onClick={() => {
+        window.speechSynthesis.cancel();
+        speak("¡Genial! Vamos a jugar.");
+        setTab('home');
+      }}>
+        ¡Iniciemos!
+      </Button>
+    </div>
+  );
+};
 
 // --- Componente Principal ---
 export default function App() {
