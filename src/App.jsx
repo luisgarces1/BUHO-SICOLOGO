@@ -64,10 +64,10 @@ const HomeView = ({ setTab }) => (
         <div className="flex justify-between items-start gap-2">
           <div>
             <h1 className="text-3xl font-extrabold mb-2 text-yellow-100">¡Hola, Valiente!</h1>
-            <p className="text-lg opacity-90">Soy Lú el Búho. ¡Bienvenido a Isla Esperanza!</p>
+            <p className="text-lg opacity-90">Soy Lú el Búho. ¡Bienvenido a Lú el Búho!</p>
           </div>
           <AudioButton 
-            text="¡Hola, Valiente! Soy Lú el Búho. ¡Bienvenido a Isla Esperanza! Toca el botón de abajo para decirme cómo te sientes hoy." 
+            text="¡Hola, Valiente! Soy Lú el Búho. ¡Bienvenido a Lú el Búho! Toca el botón de abajo para decirme cómo te sientes hoy." 
             colorClass="bg-white/20 text-white hover:bg-white/40" 
           />
         </div>
@@ -450,7 +450,7 @@ export default function App() {
             <div className="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center text-white shadow-sm">
               <Star size={24} fill="currentColor" />
             </div>
-            <h1 className="font-black text-xl text-gray-800 tracking-tight">Isla Esperanza</h1>
+            <h1 className="font-black text-xl text-gray-800 tracking-tight">Lú el Búho</h1>
           </div>
           {activeTab !== 'home' && (
             <button onClick={() => handleTabChange('home')} className="bg-gray-100 p-2 rounded-full text-gray-600 hover:bg-gray-200">
