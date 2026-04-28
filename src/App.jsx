@@ -434,7 +434,7 @@ const TribeView = () => (
 // 0. Vista: Landing Page (Intro)
 const LandingView = ({ setTab }) => {
   const [isTalking, setIsTalking] = useState(false);
-  const welcomeText = "¡Hola! Soy Lú el Búho. Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos. ¿Estás listo para iniciar?";
+  const welcomeText = "¡Hola! Soy Lú el Búho. Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos. Toca el botón para que iniciemos.";
 
   const playWelcome = () => {
     speak(welcomeText, () => setIsTalking(true), () => setIsTalking(false));
@@ -467,7 +467,8 @@ const LandingView = ({ setTab }) => {
         <h1 className="text-4xl font-extrabold text-purple-800 mb-4">Lú el Búho</h1>
         <p className="text-lg text-purple-600 font-medium leading-relaxed max-w-xs mx-auto">
           ¡Hola! Soy Lú el Búho.<br/><br/>
-          Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos.
+          Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos.<br/><br/>
+          Toca el botón para que iniciemos.
         </p>
       </div>
 
