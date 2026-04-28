@@ -473,7 +473,9 @@ const LandingView = ({ setTab }) => {
 // Pantalla inicial requerida para habilitar el audio automático en navegadores
 const StartScreen = ({ onStart }) => (
   <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-purple-400 to-indigo-600 text-white animate-fade-in text-center px-4 w-full max-w-md mx-auto sm:rounded-3xl sm:h-[850px] sm:my-8 shadow-2xl">
-    <div className="text-8xl mb-8 animate-bounce-slow">🦉</div>
+    <div className="w-48 h-48 mb-8 rounded-full overflow-hidden shadow-2xl border-4 border-white mx-auto animate-bounce-slow">
+      <img src="/lu-intro.png" alt="Lú el Búho" className="w-full h-full object-cover" />
+    </div>
     <h1 className="text-5xl font-black mb-4 tracking-tight">Lú el Búho</h1>
     <p className="text-xl mb-12 opacity-90 font-medium">Tu refugio seguro</p>
     <Button variant="magic" className="text-2xl py-5 px-12 shadow-2xl animate-pulse" onClick={onStart}>
