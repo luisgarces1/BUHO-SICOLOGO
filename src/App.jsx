@@ -173,8 +173,11 @@ const DreamsView = () => {
 
   const handleDreamClick = (dream) => {
     setSelectedDream(dream);
-    const titleAudio = dream.title;
-    speak(`¡Serás un gran ${titleAudio}! ${dream.desc} Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!`);
+    if (dream.title === "Otro") {
+      speak(`¡Cuéntame qué quisieras ser! ${dream.desc} Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!`);
+    } else {
+      speak(`¡Serás un gran ${dream.title}! ${dream.desc} Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!`);
+    }
   };
 
   return (
