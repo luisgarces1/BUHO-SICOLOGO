@@ -59,26 +59,37 @@ const Button = ({ children, onClick, variant = "primary", className = "" }) => {
 // --- Vistas de la Aplicación ---
 
 // 1. Vista: Inicio (Dashboard)
-const HomeView = ({ setTab }) => (
-  <div className="space-y-6 animate-fade-in">
-    <div className="bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl p-6 text-white shadow-lg relative overflow-hidden">
-      <div className="relative z-10">
-        <div className="flex justify-between items-start gap-2">
-          <div>
-            <h1 className="text-3xl font-extrabold mb-2 text-yellow-100">¡Hola, Valiente!</h1>
-            <p className="text-lg opacity-90">Soy Lú el Búho. ¡Bienvenido a Lú el Búho!</p>
+const HomeView = ({ setTab }) => {
+  const homeText = "¡Hola, Valiente! ¡Qué alegría verte por aquí! Toca el botón de abajo para decirme cómo te sientes hoy.";
+
+  useEffect(() => {
+    // Al entrar a la página principal, habla automáticamente.
+    const timer = setTimeout(() => {
+      speak(homeText);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="space-y-6 animate-fade-in">
+      <div className="bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl p-6 text-white shadow-lg relative overflow-hidden">
+        <div className="relative z-10">
+          <div className="flex justify-between items-start gap-2">
+            <div>
+              <h1 className="text-3xl font-extrabold mb-2 text-yellow-100">¡Hola, Valiente!</h1>
+              <p className="text-lg opacity-90">¡Qué alegría verte por aquí!</p>
+            </div>
+            <AudioButton 
+              text={homeText} 
+              colorClass="bg-white/20 text-white hover:bg-white/40" 
+            />
           </div>
-          <AudioButton 
-            text="¡Hola, Valiente! Soy Lú el Búho. ¡Bienvenido a Lú el Búho! Toca el botón de abajo para decirme cómo te sientes hoy." 
-            colorClass="bg-white/20 text-white hover:bg-white/40" 
-          />
+          <Button variant="magic" className="mt-4 text-sm py-2 px-4 shadow-xl" onClick={() => setTab('chat')}>
+            ¿Cómo te sientes hoy?
+          </Button>
         </div>
-        <Button variant="magic" className="mt-4 text-sm py-2 px-4" onClick={() => setTab('chat')}>
-          ¿Cómo te sientes hoy?
-        </Button>
+        <Sun className="absolute -right-4 -top-4 w-32 h-32 text-yellow-300 opacity-50 animate-spin-slow" />
       </div>
-      <Sun className="absolute -right-4 -top-4 w-32 h-32 text-yellow-300 opacity-50 animate-spin-slow" />
-    </div>
 
     <div className="grid grid-cols-2 gap-4">
       <Card onClick={() => setTab('dreams')} className="bg-yellow-50 text-center flex flex-col items-center justify-center">
@@ -114,7 +125,8 @@ const HomeView = ({ setTab }) => (
       </Card>
     </div>
   </div>
-);
+  );
+};
 
 // 2. Vista: Lú el Búho (Emociones y Comunicación)
 const ChatView = () => {
