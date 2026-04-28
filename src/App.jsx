@@ -72,26 +72,23 @@ const HomeView = ({ setTab }) => {
   }, []);
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      <div className="bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl p-6 text-white shadow-lg relative overflow-hidden">
-        <div className="relative z-10">
-          <div className="flex justify-between items-start gap-2">
-            <div>
-              <h1 className="text-3xl font-extrabold mb-2 text-yellow-100">¡Hola, Valiente!</h1>
-              <p className="text-lg opacity-90">¡Qué alegría verte por aquí!</p>
-            </div>
-            <AudioButton 
-              text={homeText} 
-              colorClass="bg-white/20 text-white hover:bg-white/40" 
-            />
-          </div>
-          <Button variant="magic" className="mt-4 text-sm py-2 px-4 shadow-xl" onClick={() => setTab('chat')}>
+    <div className="flex flex-col h-full min-h-[65vh] animate-fade-in">
+      <div className="bg-gradient-to-r from-blue-400 to-purple-400 rounded-3xl p-8 text-white shadow-lg relative overflow-hidden flex-1 flex flex-col items-center justify-center text-center">
+        <div className="relative z-10 flex flex-col items-center w-full h-full justify-center">
+          <AudioButton 
+            text={homeText} 
+            colorClass="bg-white/20 text-white hover:bg-white/40 absolute -top-4 right-0" 
+          />
+          <h1 className="text-5xl font-extrabold mb-4 text-yellow-100 mt-4">¡Hola,<br/>Valiente!</h1>
+          <p className="text-2xl opacity-90 mb-10">¡Qué alegría verte por aquí!</p>
+          
+          <Button variant="magic" className="mt-4 text-xl py-4 px-8 shadow-xl" onClick={() => setTab('chat')}>
             ¿Cómo te sientes hoy?
           </Button>
         </div>
-        <Sun className="absolute -right-4 -top-4 w-32 h-32 text-yellow-300 opacity-50 animate-spin-slow" />
+        <Sun className="absolute -right-10 -top-10 w-64 h-64 text-yellow-300 opacity-50 animate-spin-slow" />
       </div>
-  </div>
+    </div>
   );
 };
 
