@@ -434,7 +434,16 @@ const TribeView = () => (
 // 0. Vista: Landing Page (Intro)
 const LandingView = ({ setTab }) => {
   const videoRef = React.useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play().catch(e => console.error("Auto-play error:", e));
+      }
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handlePlayVideo = () => {
     if (videoRef.current) {
@@ -450,7 +459,6 @@ const LandingView = ({ setTab }) => {
           <video 
             ref={videoRef}
             src={luVideo} 
-            autoPlay 
             playsInline 
             onPlay={() => setIsPlaying(true)}
             onEnded={() => setIsPlaying(false)}
