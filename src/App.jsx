@@ -196,18 +196,17 @@ const DreamsView = () => {
   const [selectedDream, setSelectedDream] = useState(null);
   
   const dreams = [
-    { id: 1, icon: "🩺", title: "Doctor/a", desc: "Para sanar a las personas." },
+    { id: 1, icon: "🩺", title: "Doctor", desc: "Para sanar a las personas." },
     { id: 2, icon: "🚀", title: "Astronauta", desc: "Para explorar las estrellas." },
     { id: 3, icon: "🎨", title: "Artista", desc: "Para pintar un mundo hermoso." },
-    { id: 4, icon: "💻", title: "Inventor/a", desc: "Para crear cosas nuevas." },
+    { id: 4, icon: "💻", title: "Inventor", desc: "Para crear cosas nuevas." },
     { id: 5, icon: "👮", title: "Policía", desc: "Para proteger a los demás." },
-    { id: 6, icon: "👩‍🏫", title: "Maestro/a", desc: "Para enseñar a otros niños." }
+    { id: 6, icon: "👩‍🏫", title: "Maestro", desc: "Para enseñar a otros niños." }
   ];
 
   const handleDreamClick = (dream) => {
     setSelectedDream(dream);
-    // Transforma el texto de forma inclusiva para el audio
-    const titleAudio = dream.title.includes('/a') ? dream.title.replace('/a', ' o ' + dream.title.slice(0, -2) + 'a') : dream.title;
+    const titleAudio = dream.title;
     speak(`¡Serás un gran ${titleAudio}! ${dream.desc} Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!`);
   };
 
@@ -241,7 +240,7 @@ const DreamsView = () => {
 
       {selectedDream && (
         <div className="bg-gradient-to-r from-yellow-300 to-orange-400 p-6 rounded-3xl text-white shadow-lg animate-slide-up">
-          <h3 className="text-xl font-bold mb-2">¡Serás un(a) gran {selectedDream.title.toLowerCase()}!</h3>
+          <h3 className="text-xl font-bold mb-2">¡Serás un gran {selectedDream.title.toLowerCase()}!</h3>
           <p className="text-lg opacity-90">{selectedDream.desc}</p>
           <p className="mt-4 font-bold bg-white/20 p-3 rounded-xl">Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!</p>
         </div>
@@ -343,7 +342,7 @@ const PlayView = () => {
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: 'Si fueras un animal, ¿cuál serías y qué sonido harías?' },
     { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: Cuéntame un chiste (aunque sea muy malo).' },
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: '¿Qué es lo que más te hace reír a carcajadas?' },
-    { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: ¿A qué le tenías un poquito de miedo cuando eras pequeño/a?' }
+    { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: ¿A qué le tenías un poquito de miedo cuando eras pequeña?' }
   ];
 
   const currentQ = questions[questionIndex];
