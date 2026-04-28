@@ -64,10 +64,10 @@ const HomeView = ({ setTab }) => {
   const homeText = "¡Hola, Valiente! ¡Qué alegría verte por aquí! Toca el botón de abajo para decirme cómo te sientes hoy.";
 
   useEffect(() => {
-    // Al entrar a la página principal, habla automáticamente.
+    // Retraso de 800ms para evitar que el audio se corte al cargar la vista
     const timer = setTimeout(() => {
       speak(homeText);
-    }, 500);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
