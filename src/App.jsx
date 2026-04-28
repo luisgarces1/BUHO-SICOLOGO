@@ -417,9 +417,40 @@ const TribeView = () => (
 );
 
 
+// 0. Vista: Landing Page (Intro)
+const LandingView = ({ setTab }) => (
+  <div className="flex flex-col items-center justify-center min-h-[75vh] space-y-10 animate-fade-in text-center px-4">
+    <div className="relative mt-8">
+      <div className="w-56 h-56 rounded-full overflow-hidden shadow-2xl border-4 border-purple-300 mx-auto animate-bounce-slow bg-white">
+        <img src="/lu-intro.png" alt="Lú el Búho" className="w-full h-full object-cover" />
+      </div>
+      <AudioButton 
+        text="¡Bienvenidos a nuestra página de Lú el búho! Iniciemos, este es nuestro lugar seguro para que hablemos." 
+        className="absolute -bottom-2 right-2 bg-purple-100 p-3 shadow-lg" 
+        colorClass="text-purple-700 hover:bg-purple-200"
+      />
+    </div>
+    
+    <div>
+      <h1 className="text-4xl font-extrabold text-purple-800 mb-4">Lú el Búho</h1>
+      <p className="text-xl text-purple-600 font-medium leading-relaxed max-w-xs mx-auto">
+        Bienvenidos a nuestra página de Lú el búho.<br/><br/>
+        Iniciemos, este es nuestro lugar seguro para que hablemos.
+      </p>
+    </div>
+
+    <Button variant="magic" className="w-full max-w-xs py-4 text-2xl flex items-center justify-center shadow-xl" onClick={() => {
+      speak("¡Iniciemos!");
+      setTab('home');
+    }}>
+      ¡Iniciemos!
+    </Button>
+  </div>
+);
+
 // --- Componente Principal ---
 export default function App() {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('landing');
 
   // Detener el audio cuando el niño cambie de pantalla
   const handleTabChange = (tab) => {
@@ -429,13 +460,14 @@ export default function App() {
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'landing': return <LandingView setTab={handleTabChange} />;
       case 'home': return <HomeView setTab={handleTabChange} />;
       case 'chat': return <ChatView />;
       case 'dreams': return <DreamsView />;
       case 'shield': return <ShieldView />;
       case 'play': return <PlayView />;
       case 'tribe': return <TribeView />;
-      default: return <HomeView setTab={handleTabChange} />;
+      default: return <LandingView setTab={handleTabChange} />;
     }
   };
 
@@ -445,6 +477,7 @@ export default function App() {
       <div className="w-full max-w-md bg-white shadow-2xl relative flex flex-col h-screen overflow-hidden sm:rounded-3xl sm:h-[850px] sm:my-8 border-4 border-gray-100">
         
         {/* Header App */}
+        {activeTab !== 'landing' && (
         <header className="px-6 pt-10 pb-4 flex justify-between items-center bg-white z-10">
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center text-white shadow-sm">
@@ -458,6 +491,7 @@ export default function App() {
             </button>
           )}
         </header>
+        )}
 
         {/* Área de Contenido con scroll */}
         <main className="flex-1 overflow-y-auto px-6 pb-24 bg-gray-50/50 rounded-t-3xl shadow-inner">
@@ -467,6 +501,7 @@ export default function App() {
         </main>
 
         {/* Barra de Navegación Inferior */}
+        {activeTab !== 'landing' && (
         <nav className="absolute bottom-0 w-full bg-white border-t border-gray-100 px-6 py-4 flex justify-between items-center z-20 pb-8 sm:pb-4 sm:rounded-b-3xl">
           <button 
             onClick={() => handleTabChange('home')}
@@ -510,6 +545,7 @@ export default function App() {
             <span className="text-[10px] font-bold">Jugar</span>
           </button>
         </nav>
+        )}
 
         {/* Estilos CSS globales integrados para animaciones suaves */}
         <style dangerouslySetInnerHTML={{__html: `
@@ -529,6 +565,12 @@ export default function App() {
           .animate-slide-up { animation: slideUp 0.3s ease-out; }
           .animate-slide-down { animation: slideDown 0.3s ease-out; }
           .animate-spin-slow { animation: spin 12s linear infinite; }
+          @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+          }
+          .animate-bounce-slow { animation: float 4s ease-in-out infinite; }
         `}} />
       </div>
     </div>
