@@ -91,40 +91,6 @@ const HomeView = ({ setTab }) => {
         </div>
         <Sun className="absolute -right-4 -top-4 w-32 h-32 text-yellow-300 opacity-50 animate-spin-slow" />
       </div>
-
-    <div className="grid grid-cols-2 gap-4">
-      <Card onClick={() => setTab('dreams')} className="bg-yellow-50 text-center flex flex-col items-center justify-center">
-        <div className="bg-yellow-200 p-4 rounded-full mb-3 text-yellow-600 relative">
-          <Star size={32} />
-        </div>
-        <h3 className="font-bold text-yellow-800 text-lg">Mis Sueños</h3>
-        <p className="text-xs text-yellow-600 mt-1">Tu futuro brillante</p>
-      </Card>
-
-      <Card onClick={() => setTab('shield')} className="bg-red-50 text-center flex flex-col items-center justify-center">
-        <div className="bg-red-200 p-4 rounded-full mb-3 text-red-600 relative">
-          <Shield size={32} />
-        </div>
-        <h3 className="font-bold text-red-800 text-lg">Escudo Mágico</h3>
-        <p className="text-xs text-red-600 mt-1">Protección y valor</p>
-      </Card>
-
-      <Card onClick={() => setTab('play')} className="bg-green-50 text-center flex flex-col items-center justify-center">
-        <div className="bg-green-200 p-4 rounded-full mb-3 text-green-600">
-          <Gamepad2 size={32} />
-        </div>
-        <h3 className="font-bold text-green-800 text-lg">Jugar Juntos</h3>
-        <p className="text-xs text-green-600 mt-1">Romper el hielo</p>
-      </Card>
-
-      <Card onClick={() => setTab('tribe')} className="bg-blue-50 text-center flex flex-col items-center justify-center">
-        <div className="bg-blue-200 p-4 rounded-full mb-3 text-blue-600">
-          <Users size={32} />
-        </div>
-        <h3 className="font-bold text-blue-800 text-lg">Mi Tribu</h3>
-        <p className="text-xs text-blue-600 mt-1">Amigos y respeto</p>
-      </Card>
-    </div>
   </div>
   );
 };
@@ -572,11 +538,11 @@ export default function App() {
         {activeTab !== 'landing' && (
         <nav className="absolute bottom-0 w-full bg-white border-t border-gray-100 px-6 py-4 flex justify-between items-center z-20 pb-8 sm:pb-4 sm:rounded-b-3xl">
           <button 
-            onClick={() => handleTabChange('home')}
-            className={`flex flex-col items-center gap-1 ${activeTab === 'home' ? 'text-purple-600' : 'text-gray-400 hover:text-gray-600'}`}
+            onClick={() => handleTabChange('dreams')}
+            className={`flex flex-col items-center gap-1 ${activeTab === 'dreams' ? 'text-yellow-500' : 'text-gray-400 hover:text-gray-600'}`}
           >
-            <Map size={24} className={activeTab === 'home' ? 'fill-purple-100' : ''} />
-            <span className="text-[10px] font-bold">Mapa</span>
+            <Star size={24} className={activeTab === 'dreams' ? 'fill-yellow-100' : ''} />
+            <span className="text-[10px] font-bold">Sueños</span>
           </button>
           
           <button 
