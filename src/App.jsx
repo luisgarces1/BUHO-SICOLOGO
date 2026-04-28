@@ -133,10 +133,10 @@ const ChatView = () => {
   const [emotion, setEmotion] = useState(null);
 
   const responses = {
-    happy: "¡Qué alegría! Tu sonrisa ilumina el mundo. ¡Chócala con la persona que está a tu lado!",
-    sad: "Está bien sentirse triste a veces. Llorar limpia el corazón. ¿Te gustaría mostrarle esta carita triste a la persona que te acompaña? Está aquí para escucharte y ayudarte.",
-    scared: "El miedo nos hace estar alerta, pero no estás solo. El adulto que está contigo en esta habitación te protege. ¡Si quieres, puedes tomarle la mano!",
-    angry: "¡Uf! Cuando estés muy enojado, imagina que eres un globo. Toma aire... y suéltalo despacio. ¿Qué tal si le cuentas a la persona que está contigo qué te hizo enojar tanto?"
+    happy: "¡Qué alegría! Tu sonrisa ilumina el mundo. ¡Chócala con la amiga psicóloga que está a tu lado!",
+    sad: "Está bien sentirse triste a veces. Llorar limpia el corazón. ¿Te gustaría mostrarle esta carita triste a la amiga psicóloga que te acompaña? Está aquí para escucharte y ayudarte.",
+    scared: "El miedo nos hace estar alerta, pero no estás solo. La amiga psicóloga que está contigo en esta habitación te protege. ¡Si quieres, puedes tomarle la mano!",
+    angry: "¡Uf! Cuando estés muy enojado, imagina que eres un globo. Toma aire... y suéltalo despacio. ¿Qué tal si le cuentas a la amiga psicóloga qué te hizo enojar tanto?"
   };
 
   const handleEmotion = (emo) => {
@@ -339,11 +339,11 @@ const PlayView = () => {
 
   const questions = [
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: 'Si pudieras tener un superpoder, ¿cuál elegirías y por qué?' },
-    { turn: 'adulto', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno del adulto: ¿Cuál era tu juguete favorito cuando tenías mi edad?' },
+    { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: ¿Cuál era tu juguete favorito cuando tenías mi edad?' },
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: 'Si fueras un animal, ¿cuál serías y qué sonido harías?' },
-    { turn: 'adulto', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno del adulto: Cuéntame un chiste (aunque sea muy malo).' },
+    { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: Cuéntame un chiste (aunque sea muy malo).' },
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: '¿Qué es lo que más te hace reír a carcajadas?' },
-    { turn: 'adulto', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno del adulto: ¿A qué le tenías un poquito de miedo cuando eras pequeño/a?' }
+    { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: ¿A qué le tenías un poquito de miedo cuando eras pequeño/a?' }
   ];
 
   const currentQ = questions[questionIndex];
@@ -360,12 +360,12 @@ const PlayView = () => {
           <Gamepad2 /> Jugar Juntos
         </h2>
         <AudioButton 
-          text="Jugar Juntos. Vamos a hacer un juego por turnos. Una pregunta para ti, y una pregunta para el adulto que te acompaña. ¡A jugar!" 
+          text="Jugar Juntos. Vamos a hacer un juego por turnos. Una pregunta para ti, y una pregunta para la amiga psicóloga que te acompaña. ¡A jugar!" 
           colorClass="bg-green-100 text-green-700" 
         />
       </div>
       <p className="text-gray-600 font-medium">
-        Un turno para ti, un turno para el adulto que te acompaña. ¡Para conocernos mejor!
+        Un turno para ti, un turno para la amiga psicóloga que te acompaña. ¡Para conocernos mejor!
       </p>
 
       <div className={`mt-8 p-8 rounded-3xl border-4 ${currentQ.color} relative animate-slide-up shadow-md`}>
