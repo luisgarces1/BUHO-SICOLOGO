@@ -4,6 +4,7 @@ import {
   Home, Map, User, Smile, Frown, AlertCircle, Sun, 
   Users, Hand, Lock, Award, BookOpen, Volume2, Gamepad2
 } from 'lucide-react';
+import luVideo from './assets/be_ae_b_e_afb_c_b_a_bmp_.mp4';
 
 // --- Utilidad de Voz (Text-to-Speech) ---
 const speak = (text, onStart, onEnd) => {
@@ -451,7 +452,7 @@ const LandingView = ({ setTab }) => {
     <div className="flex flex-col items-center justify-center min-h-[75vh] space-y-8 animate-fade-in text-center px-4">
       <div className="relative mt-8 cursor-pointer" onClick={playWelcome}>
         <div className={`w-56 h-56 rounded-full overflow-hidden border-4 border-purple-300 mx-auto bg-white transition-all duration-300 ${isTalking ? 'animate-pulse scale-105 shadow-[0_0_30px_rgba(168,85,247,0.6)]' : 'animate-bounce-slow shadow-2xl'}`}>
-          <img src="/lu-intro.png" alt="Lú el Búho" className="w-full h-full object-cover" />
+          <video src={luVideo} autoPlay loop muted playsInline className="w-full h-full object-cover" />
         </div>
         <button 
           onClick={(e) => { e.stopPropagation(); playWelcome(); }} 
