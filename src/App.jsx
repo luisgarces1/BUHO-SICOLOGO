@@ -342,7 +342,7 @@ const PlayView = () => {
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: 'Si fueras un animal, ¿cuál serías y qué sonido harías?' },
     { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: Cuéntame un chiste (aunque sea muy malo).' },
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: '¿Qué es lo que más te hace reír a carcajadas?' },
-    { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: ¿A qué le tenías un poquito de miedo cuando eras pequeña?' }
+    { turn: 'psicóloga', icon: '🧑👩', color: 'bg-blue-100 border-blue-300 text-blue-800', q: 'Turno de la amiga psicóloga: ¿A qué le tenías un poquito de miedo cuando eras pequeño?' }
   ];
 
   const currentQ = questions[questionIndex];
