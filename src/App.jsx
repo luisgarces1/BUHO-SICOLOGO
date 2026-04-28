@@ -302,6 +302,7 @@ const ShieldView = () => {
 // 5. Vista: Jugar Juntos (Minijuego Rompehielos Sicólogo-Niño)
 const PlayView = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
   const questions = [
     { turn: 'niño', icon: '👦👧', color: 'bg-yellow-100 border-yellow-300 text-yellow-800', q: 'Si pudieras tener un superpoder, ¿cuál elegirías y por qué?' },
@@ -316,8 +317,34 @@ const PlayView = () => {
 
   const handleNext = () => {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    setQuestionIndex((prev) => (prev + 1) % questions.length);
+    if (questionIndex + 1 === questions.length) {
+      setIsFinished(true);
+    } else {
+      setQuestionIndex((prev) => prev + 1);
+    }
   };
+
+  if (isFinished) {
+    return (
+      <div className="space-y-6 animate-fade-in text-center flex flex-col items-center justify-center min-h-[50vh] px-2">
+        <div className="bg-green-100 p-8 rounded-3xl border-4 border-green-300 shadow-xl relative animate-slide-up mt-8">
+          <Heart className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 text-green-500 bg-white rounded-full p-2 border-4 border-green-300" fill="currentColor" />
+          <h2 className="text-3xl font-black text-green-800 mb-4 mt-6">¡Excelente!</h2>
+          <p className="text-lg text-green-700 font-medium mb-6 leading-relaxed">
+            Ahora que ya nos conocemos mejor y hemos roto el hielo... ¡Es tu turno de brillar! <br/><br/>
+            Cuéntale a tu amiga psicóloga cómo te sientes, una historia que te guste o algo que te haya pasado hoy. ¡Ella está aquí para escucharte con todo el corazón!
+          </p>
+          <AudioButton 
+            text="¡Excelente! Ahora que ya nos conocemos mejor y hemos roto el hielo... ¡Es tu turno de brillar! Cuéntale a tu amiga psicóloga cómo te sientes, una historia que te guste o algo que te haya pasado hoy. ¡Ella está aquí para escucharte con todo el corazón!" 
+            colorClass="bg-green-200 text-green-800 hover:bg-green-300 mx-auto flex w-12 h-12 items-center justify-center" 
+          />
+        </div>
+        <Button variant="green" className="mt-8 flex justify-center items-center gap-2" onClick={() => { setIsFinished(false); setQuestionIndex(0); }}>
+          <Gamepad2 size={20} /> Volver a Jugar
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 animate-fade-in text-center">
