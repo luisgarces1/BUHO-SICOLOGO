@@ -433,31 +433,35 @@ const TribeView = () => (
 
 // 0. Vista: Landing Page (Intro)
 const LandingView = ({ setTab }) => {
-  const [isTalking, setIsTalking] = useState(false);
-  const welcomeText = "¡Hola! Soy Lú el Búho. Este es nuestro refugio secreto y seguro. Aquí podemos jugar, hablar y descubrir cosas maravillosas juntos. Toca el botón para que iniciemos.";
+  const videoRef = React.useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
 
-  const playWelcome = () => {
-    speak(welcomeText, () => setIsTalking(true), () => setIsTalking(false));
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+    }
   };
-
-  useEffect(() => {
-    // Intentar reproducir automáticamente después de un pequeño retraso
-    const timer = setTimeout(() => {
-      playWelcome();
-    }, 800);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[75vh] space-y-8 animate-fade-in text-center px-4">
-      <div className="relative mt-8 cursor-pointer" onClick={playWelcome}>
-        <div className={`w-56 h-56 rounded-full overflow-hidden border-4 border-purple-300 mx-auto bg-white transition-all duration-300 ${isTalking ? 'animate-pulse scale-105 shadow-[0_0_30px_rgba(168,85,247,0.6)]' : 'animate-bounce-slow shadow-2xl'}`}>
-          <video src={luVideo} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+      <div className="relative mt-8 cursor-pointer" onClick={handlePlayVideo}>
+        <div className={`w-56 h-56 rounded-full overflow-hidden border-4 border-purple-300 mx-auto bg-white transition-all duration-300 ${isPlaying ? 'scale-105 shadow-[0_0_30px_rgba(168,85,247,0.6)]' : 'animate-bounce-slow shadow-2xl'}`}>
+          <video 
+            ref={videoRef}
+            src={luVideo} 
+            autoPlay 
+            playsInline 
+            onPlay={() => setIsPlaying(true)}
+            onEnded={() => setIsPlaying(false)}
+            onPause={() => setIsPlaying(false)}
+            className="w-full h-full object-cover" 
+          />
         </div>
         <button 
-          onClick={(e) => { e.stopPropagation(); playWelcome(); }} 
+          onClick={(e) => { e.stopPropagation(); handlePlayVideo(); }} 
           className="absolute -bottom-2 right-2 bg-purple-100 p-4 shadow-lg rounded-full text-purple-700 hover:bg-purple-200 transition-transform active:scale-95 z-10"
-          title="Escuchar texto"
+          title="Escuchar video"
         >
           <Volume2 size={24} />
         </button>
