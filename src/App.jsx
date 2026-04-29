@@ -469,12 +469,12 @@ const MonsterView = () => {
   const [history, setHistory] = useState([]);
 
   const emotions = [
-    { id: 1, name: 'Alegría', gender: 'f', color: 'bg-yellow-400', text: 'Amarillo como el sol. ¡Brilla con mucha fuerza!', pos: '0% 0%', description: '¡Qué felicidad! Sientes ganas de saltar, bailar y jugar.' },
-    { id: 2, name: 'Tristeza', gender: 'f', color: 'bg-blue-400', text: 'Azul como el mar. Suave y dulce.', pos: '50% 100%', description: 'Está bien estar triste. Es como un día de lluvia.' },
-    { id: 3, name: 'Rabia', gender: 'f', color: 'bg-red-500', text: 'Roja como el fuego. Feroz y ardiente.', pos: '100% 0%', description: '¡Uff! Quieres gritar y soltar todo ese fuego.' },
-    { id: 4, name: 'Miedo', gender: 'm', color: 'bg-gray-600', text: 'Negro y oscuro. Se esconde en las sombras.', pos: '50% 0%', description: 'El miedo nos hace sentir pequeños, pero Lú te acompaña.' },
-    { id: 5, name: 'Calma', gender: 'f', color: 'bg-green-400', text: 'Verde como las hojas de los árboles.', pos: '0% 100%', description: 'Respiras poco a poco y profundamente. Todo está en paz.' },
-    { id: 6, name: 'Amor', gender: 'm', color: 'bg-pink-400', text: 'Rosa y dulce. ¡Un gran abrazo!', pos: '100% 100%', description: '¡Qué bonito! Te sientes querido y con ganas de dar amor.' }
+    { id: 1, name: 'Alegría', gender: 'f', color: 'bg-yellow-400', text: 'Amarillo como el sol. ¡Brilla con mucha fuerza!', pos: '0% 5%', description: '¡Qué felicidad! Sientes ganas de saltar, bailar y jugar.' },
+    { id: 2, name: 'Tristeza', gender: 'f', color: 'bg-blue-400', text: 'Azul como el mar. Suave y dulce.', pos: '50% 90%', description: 'Está bien estar triste. Es como un día de lluvia.' },
+    { id: 3, name: 'Rabia', gender: 'f', color: 'bg-red-500', text: 'Roja como el fuego. Feroz y ardiente.', pos: '100% 5%', description: '¡Uff! Quieres gritar y soltar todo ese fuego.' },
+    { id: 4, name: 'Miedo', gender: 'm', color: 'bg-gray-600', text: 'Negro y oscuro. Se esconde en las sombras.', pos: '50% 5%', description: 'El miedo nos hace sentir pequeños, pero Lú te acompaña.' },
+    { id: 5, name: 'Calma', gender: 'f', color: 'bg-green-400', text: 'Verde como las hojas de los árboles.', pos: '0% 90%', description: 'Respiras poco a poco y profundamente. Todo está en paz.' },
+    { id: 6, name: 'Amor', gender: 'm', color: 'bg-pink-400', text: 'Rosa y dulce. ¡Un gran abrazo!', pos: '100% 90%', description: '¡Qué bonito! Te sientes querido y con ganas de dar amor.' }
   ];
 
   const storyText = "¡Hola! Soy Lú el Búho. Hoy te contaré una historia especial. Había una vez un monstruo que se despertó muy confundido; sus emociones estaban todas mezcladas y no sabía qué le pasaba. Su amiga le enseñó que cada sentimiento tiene un color: la alegría es amarilla como el sol, la tristeza es azul como el mar, la rabia es roja y feroz como el fuego, el miedo es negro y se esconde en la oscuridad, y la calma es verde, tranquila como los árboles. Al poner cada emoción en su propio bote, el monstruo se sintió mucho mejor. ¡Incluso descubrió un nuevo color, el rosa, que es el del amor! Recuerda: cuando ordenas lo que sientes, todo es más fácil. ¿Cómo te sientes tú hoy?";
@@ -590,7 +590,7 @@ const MonsterView = () => {
                   style={{ 
                     backgroundImage: `url(${monsterSprites})`,
                     backgroundPosition: emo.pos,
-                    backgroundSize: '320% 210%', // Ajustado para mayor resolución visual y mejor encuadre
+                    backgroundSize: '380% 240%', // Más zoom para eliminar etiquetas de texto
                     backgroundColor: 'white'
                   }}
                 />
@@ -629,7 +629,7 @@ const MonsterView = () => {
               style={{ 
                 backgroundImage: `url(${monsterSprites})`,
                 backgroundPosition: selectedEmotion.pos,
-                backgroundSize: '310% 205%',
+                backgroundSize: '370% 235%', // Más zoom para eliminar etiquetas de texto
                 imageRendering: 'pixelated'
               }}
             />
