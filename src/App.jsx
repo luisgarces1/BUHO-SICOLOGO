@@ -5,6 +5,7 @@ import {
   Users, Hand, Lock, Award, BookOpen, Volume2, Gamepad2, RotateCw
 } from 'lucide-react';
 import luVideo from './assets/be_ae_b_e_afb_c_b_a_bmp_.mp4';
+import rouletteImg from './assets/WhatsApp Image 2026-04-28 at 7.49.31 PM.jpeg';
 
 // --- Utilidad de Voz (Text-to-Speech) ---
 let selectedVoice = null;
@@ -514,8 +515,8 @@ const MonsterView = () => {
   if (step === 'intro') {
     return (
       <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in text-center py-8">
-        <div className="w-48 h-48 bg-purple-100 rounded-full flex items-center justify-center border-8 border-white shadow-xl">
-          <BookOpen size={80} className="text-purple-500" />
+        <div className="w-56 h-56 bg-white rounded-full flex items-center justify-center border-8 border-purple-200 shadow-2xl overflow-hidden">
+          <img src={rouletteImg} alt="Ruleta de Colores" className="w-full h-full object-cover scale-110" />
         </div>
         <div>
           <h2 className="text-3xl font-black text-purple-800 mb-2">El Monstruo de Colores</h2>
