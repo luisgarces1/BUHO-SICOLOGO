@@ -523,7 +523,7 @@ const MonsterView = () => {
     return (
       <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in text-center py-8">
         <div className="w-64 h-64 bg-white rounded-full flex items-center justify-center border-8 border-purple-200 shadow-2xl overflow-hidden">
-          <img src={rouletteImg} alt="Ruleta de Colores" className="w-full h-full object-cover scale-125 object-[45%_48%]" />
+          <img src={rouletteImg} alt="Ruleta de Colores" className="w-full h-full object-cover scale-105" />
         </div>
         <div>
           <h2 className="text-3xl font-black text-purple-800 mb-2">El Monstruo de Colores</h2>
