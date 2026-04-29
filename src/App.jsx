@@ -7,15 +7,44 @@ import {
 import luVideo from './assets/be_ae_b_e_afb_c_b_a_bmp_.mp4';
 
 // --- Utilidad de Voz (Text-to-Speech) ---
+let selectedVoice = null;
+
+const loadVoices = () => {
+  if (!('speechSynthesis' in window)) return;
+  const voices = window.speechSynthesis.getVoices();
+  
+  // Preferencias de voces femeninas en español que suelen sonar mejor/más humanas
+  const preferredNames = ['Microsoft Helena', 'Microsoft Sabina', 'Google español', 'Lucia', 'Monica', 'Paulina'];
+  const esVoices = voices.filter(v => v.lang.startsWith('es'));
+  
+  // Intentar encontrar la mejor coincidencia
+  selectedVoice = esVoices.find(v => preferredNames.some(p => v.name.includes(p))) || esVoices[0];
+};
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+  loadVoices();
+}
+
 const speak = (text, onStart, onEnd) => {
   if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel(); // Detiene cualquier voz anterior
+    window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'es-ES'; // Español
-    utterance.rate = 0.9; // Velocidad un poco más lenta para niños
-    utterance.pitch = 1.1; // Tono ligeramente más agudo/amigable
+    
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    } else {
+      utterance.lang = 'es-ES';
+    }
+    
+    // Ajustes para que suene más "tierna" y pausada para niños
+    utterance.rate = 0.85; // Un poco más lento para mayor claridad y ternura
+    utterance.pitch = 1.2; // Tono ligeramente más alto para sonar más amigable/juvenil
+    utterance.volume = 1.0;
+
     if (onStart) utterance.onstart = onStart;
     if (onEnd) utterance.onend = onEnd;
+    
     window.speechSynthesis.speak(utterance);
   }
 };
