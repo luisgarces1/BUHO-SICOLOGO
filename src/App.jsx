@@ -469,12 +469,12 @@ const MonsterView = () => {
   const [history, setHistory] = useState([]);
 
   const emotions = [
-    { id: 1, name: 'Alegría', color: 'bg-yellow-400', text: 'Amarillo como el sol. ¡Brilla con mucha fuerza!', pos: '0% 0%', description: '¡Qué felicidad! Sientes ganas de saltar, bailar y jugar.' },
-    { id: 2, name: 'Tristeza', color: 'bg-blue-400', text: 'Azul como el mar. Suave y dulce.', pos: '50% 100%', description: 'Está bien estar triste. Es como un día de lluvia.' },
-    { id: 3, name: 'Rabia', color: 'bg-red-500', text: 'Roja como el fuego. Feroz y ardiente.', pos: '100% 0%', description: '¡Uff! Quieres gritar y soltar todo ese fuego.' },
-    { id: 4, name: 'Miedo', color: 'bg-gray-600', text: 'Negro y oscuro. Se esconde en las sombras.', pos: '50% 0%', description: 'El miedo nos hace sentir pequeños, pero Lú te acompaña.' },
-    { id: 5, name: 'Calma', color: 'bg-green-400', text: 'Verde como las hojas de los árboles.', pos: '0% 100%', description: 'Respiras poco a poco y profundamente. Todo está en paz.' },
-    { id: 6, name: 'Amor', color: 'bg-pink-400', text: 'Rosa y dulce. ¡Un gran abrazo!', pos: '100% 100%', description: '¡Qué bonito! Te sientes querido y con ganas de dar amor.' }
+    { id: 1, name: 'Alegría', gender: 'f', color: 'bg-yellow-400', text: 'Amarillo como el sol. ¡Brilla con mucha fuerza!', pos: '0% 0%', description: '¡Qué felicidad! Sientes ganas de saltar, bailar y jugar.' },
+    { id: 2, name: 'Tristeza', gender: 'f', color: 'bg-blue-400', text: 'Azul como el mar. Suave y dulce.', pos: '50% 100%', description: 'Está bien estar triste. Es como un día de lluvia.' },
+    { id: 3, name: 'Rabia', gender: 'f', color: 'bg-red-500', text: 'Roja como el fuego. Feroz y ardiente.', pos: '100% 0%', description: '¡Uff! Quieres gritar y soltar todo ese fuego.' },
+    { id: 4, name: 'Miedo', gender: 'm', color: 'bg-gray-600', text: 'Negro y oscuro. Se esconde en las sombras.', pos: '50% 0%', description: 'El miedo nos hace sentir pequeños, pero Lú te acompaña.' },
+    { id: 5, name: 'Calma', gender: 'f', color: 'bg-green-400', text: 'Verde como las hojas de los árboles.', pos: '0% 100%', description: 'Respiras poco a poco y profundamente. Todo está en paz.' },
+    { id: 6, name: 'Amor', gender: 'm', color: 'bg-pink-400', text: 'Rosa y dulce. ¡Un gran abrazo!', pos: '100% 100%', description: '¡Qué bonito! Te sientes querido y con ganas de dar amor.' }
   ];
 
   const storyText = "¡Hola! Soy Lú el Búho. Hoy te contaré una historia especial. Había una vez un monstruo que se despertó muy confundido; sus emociones estaban todas mezcladas y no sabía qué le pasaba. Su amiga le enseñó que cada sentimiento tiene un color: la alegría es amarilla como el sol, la tristeza es azul como el mar, la rabia es roja y feroz como el fuego, el miedo es negro y se esconde en la oscuridad, y la calma es verde, tranquila como los árboles. Al poner cada emoción en su propio bote, el monstruo se sintió mucho mejor. ¡Incluso descubrió un nuevo color, el rosa, que es el del amor! Recuerda: cuando ordenas lo que sientes, todo es más fácil. ¿Cómo te sientes tú hoy?";
@@ -514,7 +514,8 @@ const MonsterView = () => {
       setSelectedEmotion(targetEmotion);
       setHistory(prev => [...prev, targetEmotion.id]);
       const promptText = "¿Alguna vez te has sentido así? ¡Cuéntale a tu amiga la psicóloga!";
-      speak(`¡Te ha tocado la ${targetEmotion.name}! ${targetEmotion.text}. ${targetEmotion.description}. ${promptText}`);
+      const article = targetEmotion.gender === 'f' ? 'la' : 'el';
+      speak(`¡Te ha tocado ${article} ${targetEmotion.name}! ${targetEmotion.text}. ${targetEmotion.description}. ${promptText}`);
     }, 3000);
   };
 
@@ -522,7 +523,7 @@ const MonsterView = () => {
     return (
       <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in text-center py-8">
         <div className="w-64 h-64 bg-white rounded-full flex items-center justify-center border-8 border-purple-200 shadow-2xl overflow-hidden">
-          <img src={rouletteImg} alt="Ruleta de Colores" className="w-full h-full object-cover scale-150 object-[42%_50%]" />
+          <img src={rouletteImg} alt="Ruleta de Colores" className="w-full h-full object-cover scale-125 object-[45%_48%]" />
         </div>
         <div>
           <h2 className="text-3xl font-black text-purple-800 mb-2">El Monstruo de Colores</h2>
@@ -568,7 +569,7 @@ const MonsterView = () => {
         <p className="text-gray-600 font-medium mt-1">¡Gira la flecha y cuéntale a Lú qué te hace sentir así!</p>
       </div>
 
-      <div className="relative w-72 h-72 mx-auto mt-8">
+      <div className="relative w-80 h-80 mx-auto mt-8">
         {/* La Ruleta */}
         <div 
           className="w-full h-full rounded-full border-8 border-gray-800 shadow-2xl relative overflow-hidden transition-transform duration-[3000ms] ease-out"
@@ -583,7 +584,7 @@ const MonsterView = () => {
                 border: '1px solid rgba(0,0,0,0.1)'
               }}
             >
-              <div className="absolute bottom-1 left-1 transform rotate-[45deg] skewY(30deg) w-16 h-16">
+              <div className="absolute bottom-1 left-1 transform rotate-[45deg] skewY(30deg) w-20 h-20">
                 <div 
                   className="w-full h-full bg-no-repeat rounded-xl shadow-sm border-2 border-white/80"
                   style={{ 
@@ -624,7 +625,7 @@ const MonsterView = () => {
         <div className={`mt-6 p-6 rounded-3xl shadow-lg border-b-4 animate-slide-up text-white ${selectedEmotion.color} border-black/10`}>
           <div className="flex items-center justify-center gap-4 mb-3">
             <div 
-              className="w-28 h-28 bg-white rounded-3xl border-4 border-white/50 shadow-lg overflow-hidden"
+              className="w-36 h-36 bg-white rounded-3xl border-4 border-white/50 shadow-lg overflow-hidden"
               style={{ 
                 backgroundImage: `url(${monsterSprites})`,
                 backgroundPosition: selectedEmotion.pos,
