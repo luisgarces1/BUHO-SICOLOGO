@@ -224,7 +224,7 @@ const DreamsView = () => {
         No importa dónde vivas hoy o lo que tengas. ¡Tu mente y tu corazón son tus mayores tesoros! ¿Qué quieres ser de grande?
       </p>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {dreams.map(dream => (
           <div 
             key={dream.id}
@@ -509,7 +509,7 @@ const LandingView = ({ setTab }) => {
         </p>
       </div>
 
-      <Button variant="magic" className="w-full max-w-xs py-4 text-2xl flex items-center justify-center shadow-xl mt-4" onClick={() => {
+      <Button variant="magic" className="w-full max-w-md py-5 text-3xl flex items-center justify-center shadow-xl mt-4" onClick={() => {
         window.speechSynthesis.cancel();
         speak("¡Genial! Vamos a jugar.");
         setTab('home');
@@ -522,7 +522,7 @@ const LandingView = ({ setTab }) => {
 
 // Pantalla inicial requerida para habilitar el audio automático en navegadores
 const StartScreen = ({ onStart }) => (
-  <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-purple-400 to-indigo-600 text-white animate-fade-in text-center px-4 w-full max-w-md mx-auto sm:rounded-3xl sm:h-[850px] sm:my-8 shadow-2xl">
+  <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-purple-400 to-indigo-600 text-white animate-fade-in text-center px-4 w-full max-w-2xl mx-auto md:rounded-3xl md:h-[90vh] md:my-4 shadow-2xl">
     <div className="w-48 h-48 mb-8 rounded-full overflow-hidden shadow-2xl border-4 border-white mx-auto animate-bounce-slow">
       <img src="/lu-intro.png" alt="Lú el Búho" className="w-full h-full object-cover" />
     </div>
@@ -567,9 +567,9 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center font-sans">
-      {/* Contenedor tipo móvil */}
-      <div className="w-full max-w-md bg-white shadow-2xl relative flex flex-col h-screen overflow-hidden sm:rounded-3xl sm:h-[850px] sm:my-8 border-4 border-gray-100">
+    <div className="min-h-screen bg-gray-50 flex justify-center font-sans items-center">
+      {/* Contenedor adaptado a tablets y móviles */}
+      <div className="w-full max-w-2xl bg-white shadow-2xl relative flex flex-col h-screen md:h-[95vh] overflow-hidden md:rounded-[2.5rem] md:my-4 border-4 border-gray-100">
         
         {/* Header App */}
         {activeTab !== 'landing' && (
