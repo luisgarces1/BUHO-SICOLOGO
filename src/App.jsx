@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Heart, Shield, Star, Droplets, Coins, MessageCircle, 
   Home, Map, User, Smile, Frown, AlertCircle, Sun, 
-  Users, Hand, Lock, Award, BookOpen, Volume2, Gamepad2
+  Users, Hand, Lock, Award, BookOpen, Volume2, Gamepad2, RotateCw
 } from 'lucide-react';
 import luVideo from './assets/be_ae_b_e_afb_c_b_a_bmp_.mp4';
 
@@ -554,6 +554,7 @@ export default function App() {
       case 'shield': return <ShieldView />;
       case 'play': return <PlayView />;
       case 'tribe': return <TribeView />;
+      case 'monster': return <MonsterView />;
       default: return <LandingView setTab={handleTabChange} />;
     }
   };
@@ -638,6 +639,14 @@ export default function App() {
           >
             <Gamepad2 size={24} className={activeTab === 'play' ? 'fill-green-100' : ''} />
             <span className="text-[10px] font-bold">Jugar</span>
+          </button>
+ 
+          <button 
+            onClick={() => handleTabChange('monster')}
+            className={`flex flex-col items-center gap-1 ${activeTab === 'monster' ? 'text-orange-500' : 'text-gray-400 hover:text-gray-600'}`}
+          >
+            <RotateCw size={24} className={activeTab === 'monster' ? 'fill-orange-100' : ''} />
+            <span className="text-[10px] font-bold">Monstruo</span>
           </button>
         </nav>
         )}
