@@ -497,18 +497,23 @@ const MonsterView = () => {
     const targetEmotion = available[Math.floor(Math.random() * available.length)];
     const emotionIndex = emotions.findIndex(e => e.id === targetEmotion.id);
     
-    // Calcular rotación: 360 grados / 6 secciones = 60 grados por sección
     const extraSpins = 5 + Math.floor(Math.random() * 5);
     const sectionAngle = 60;
-    const targetAngle = (extraSpins * 360) + (360 - (emotionIndex * sectionAngle)) - (sectionAngle / 2);
+    const degreesToTarget = (360 - (emotionIndex * sectionAngle)) - (sectionAngle / 2);
     
-    setRotation(prev => prev + targetAngle);
+    // Cálculo preciso para que siempre gire hacia adelante y caiga exacto
+    const currentRotationMod = rotation % 360;
+    let targetRotation = rotation + (extraSpins * 360) + degreesToTarget - currentRotationMod;
+    if (targetRotation <= rotation) targetRotation += 360;
+    
+    setRotation(targetRotation);
 
     setTimeout(() => {
       setSpinning(false);
       setSelectedEmotion(targetEmotion);
       setHistory(prev => [...prev, targetEmotion.id]);
-      speak(`¡Te ha tocado la ${targetEmotion.name}! ${targetEmotion.text}. ${targetEmotion.description}`);
+      const promptText = "¿Alguna vez te has sentido así? ¡Cuéntale a tu amiga la psicóloga!";
+      speak(`¡Te ha tocado la ${targetEmotion.name}! ${targetEmotion.text}. ${targetEmotion.description}. ${promptText}`);
     }, 3000);
   };
 
