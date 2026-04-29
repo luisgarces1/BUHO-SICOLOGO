@@ -174,7 +174,7 @@ const DreamsView = () => {
   const handleDreamClick = (dream) => {
     setSelectedDream(dream);
     if (dream.title === "Otro") {
-      speak(`¡Cuéntame qué quisieras ser! ${dream.desc} Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!`);
+      speak(`¡Serás lo que desees ser! ${dream.desc} Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!`);
     } else {
       speak(`¡Serás un gran ${dream.title}! ${dream.desc} Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!`);
     }
@@ -209,9 +209,11 @@ const DreamsView = () => {
       </div>
 
       {selectedDream && (
-        <div className="bg-gradient-to-r from-yellow-300 to-orange-400 p-6 rounded-3xl text-white shadow-lg animate-slide-up">
-          <h3 className="text-xl font-bold mb-2">¡Serás un gran {selectedDream.title.toLowerCase()}!</h3>
-          <p className="text-lg opacity-90">{selectedDream.desc}</p>
+        <div className="bg-gradient-to-r from-yellow-400 via-orange-400 to-orange-500 p-6 rounded-3xl text-white shadow-lg animate-slide-up border-b-4 border-orange-600">
+          <h3 className="text-2xl font-black mb-2 tracking-tight">
+            {selectedDream.title === "Otro" ? "¡Serás lo que desees ser!" : `¡Serás un gran ${selectedDream.title.toLowerCase()}!`}
+          </h3>
+          <p className="text-lg opacity-95 font-medium">{selectedDream.desc}</p>
           <p className="mt-4 font-bold bg-white/20 p-3 rounded-xl">Recuerda: El estudio y creer en ti mismo son tu escalera hacia el éxito. ¡Tú puedes lograrlo!</p>
         </div>
       )}
