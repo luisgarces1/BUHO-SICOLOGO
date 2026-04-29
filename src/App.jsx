@@ -521,8 +521,8 @@ const MonsterView = () => {
   if (step === 'intro') {
     return (
       <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in text-center py-8">
-        <div className="w-56 h-56 bg-white rounded-full flex items-center justify-center border-8 border-purple-200 shadow-2xl overflow-hidden">
-          <img src={rouletteImg} alt="Ruleta de Colores" className="w-full h-full object-cover scale-110" />
+        <div className="w-64 h-64 bg-white rounded-full flex items-center justify-center border-8 border-purple-200 shadow-2xl overflow-hidden">
+          <img src={rouletteImg} alt="Ruleta de Colores" className="w-full h-full object-cover scale-150 object-[42%_50%]" />
         </div>
         <div>
           <h2 className="text-3xl font-black text-purple-800 mb-2">El Monstruo de Colores</h2>
@@ -583,13 +583,14 @@ const MonsterView = () => {
                 border: '1px solid rgba(0,0,0,0.1)'
               }}
             >
-              <div className="absolute bottom-2 left-2 transform rotate-[45deg] skewY(30deg) w-12 h-12">
+              <div className="absolute bottom-1 left-1 transform rotate-[45deg] skewY(30deg) w-16 h-16">
                 <div 
-                  className="w-full h-full bg-no-repeat border-2 border-white/50 rounded-lg shadow-sm"
+                  className="w-full h-full bg-no-repeat rounded-xl shadow-sm border-2 border-white/80"
                   style={{ 
                     backgroundImage: `url(${monsterSprites})`,
                     backgroundPosition: emo.pos,
-                    backgroundSize: '300% 200%'
+                    backgroundSize: '320% 210%', // Ajustado para mayor resolución visual y mejor encuadre
+                    backgroundColor: 'white'
                   }}
                 />
               </div>
@@ -623,11 +624,12 @@ const MonsterView = () => {
         <div className={`mt-6 p-6 rounded-3xl shadow-lg border-b-4 animate-slide-up text-white ${selectedEmotion.color} border-black/10`}>
           <div className="flex items-center justify-center gap-4 mb-3">
             <div 
-              className="w-20 h-20 bg-white rounded-2xl border-4 border-white/30 shadow-inner overflow-hidden"
+              className="w-28 h-28 bg-white rounded-3xl border-4 border-white/50 shadow-lg overflow-hidden"
               style={{ 
                 backgroundImage: `url(${monsterSprites})`,
                 backgroundPosition: selectedEmotion.pos,
-                backgroundSize: '300% 200%'
+                backgroundSize: '310% 205%',
+                imageRendering: 'pixelated'
               }}
             />
             <h3 className="text-3xl font-black uppercase tracking-wider">{selectedEmotion.name}</h3>
