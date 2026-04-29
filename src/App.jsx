@@ -458,6 +458,185 @@ const TribeView = () => (
 );
 
 
+// 7. Vista: El Monstruo de Colores (Cuento y Ruleta)
+const MonsterView = () => {
+  const [step, setStep] = useState('intro'); // 'intro', 'story', 'roulette'
+  const [spinning, setSpinning] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const [selectedEmotion, setSelectedEmotion] = useState(null);
+  const [history, setHistory] = useState([]);
+
+  const emotions = [
+    { id: 1, name: 'Alegría', color: 'bg-yellow-400', text: 'Amarillo como el sol. ¡Brilla con mucha fuerza!', icon: '😊', description: '¡Qué felicidad! Sientes ganas de saltar, bailar y jugar.' },
+    { id: 2, name: 'Tristeza', color: 'bg-blue-400', text: 'Azul como el mar. Suave y dulce.', icon: '😢', description: 'Está bien estar triste. Es como un día de lluvia.' },
+    { id: 3, name: 'Rabia', color: 'bg-red-500', text: 'Roja como el fuego. Feroz y ardiente.', icon: '😡', description: '¡Uff! Quieres gritar y soltar todo ese fuego.' },
+    { id: 4, name: 'Miedo', color: 'bg-gray-600', text: 'Negro y oscuro. Se esconde en las sombras.', icon: '😨', description: 'El miedo nos hace sentir pequeños, pero Lú te acompaña.' },
+    { id: 5, name: 'Calma', color: 'bg-green-400', text: 'Verde como las hojas de los árboles.', icon: '😌', description: 'Respiras poco a poco y profundamente. Todo está en paz.' },
+    { id: 6, name: 'Amor', color: 'bg-pink-400', text: 'Rosa y dulce. ¡Un gran abrazo!', icon: '💖', description: '¡Qué bonito! Te sientes querido y con ganas de dar amor.' }
+  ];
+
+  const storyText = "¡Hola! Soy Lú el Búho. Hoy te contaré una historia especial. Había una vez un monstruo que se despertó muy confundido; sus emociones estaban todas mezcladas y no sabía qué le pasaba. Su amiga le enseñó que cada sentimiento tiene un color: la alegría es amarilla como el sol, la tristeza es azul como el mar, la rabia es roja y feroz como el fuego, el miedo es negro y se esconde en la oscuridad, y la calma es verde, tranquila como los árboles. Al poner cada emoción en su propio bote, el monstruo se sintió mucho mejor. ¡Incluso descubrió un nuevo color, el rosa, que es el del amor! Recuerda: cuando ordenas lo que sientes, todo es más fácil. ¿Cómo te sientes tú hoy?";
+
+  const spinRoulette = () => {
+    if (spinning) return;
+
+    setSpinning(true);
+    setSelectedEmotion(null);
+
+    // Lógica para que no repita hasta agotar el ciclo
+    let available = emotions.filter(e => !history.includes(e.id));
+    
+    // Si ya salieron todos, reiniciamos el historial (excepto el último para que no repita consecutivo)
+    if (available.length === 0) {
+      const lastId = history[history.length - 1];
+      available = emotions.filter(e => e.id !== lastId);
+      setHistory([lastId]);
+    }
+
+    const targetEmotion = available[Math.floor(Math.random() * available.length)];
+    const emotionIndex = emotions.findIndex(e => e.id === targetEmotion.id);
+    
+    // Calcular rotación: 360 grados / 6 secciones = 60 grados por sección
+    const extraSpins = 5 + Math.floor(Math.random() * 5);
+    const sectionAngle = 60;
+    const targetAngle = (extraSpins * 360) + (360 - (emotionIndex * sectionAngle)) - (sectionAngle / 2);
+    
+    setRotation(prev => prev + targetAngle);
+
+    setTimeout(() => {
+      setSpinning(false);
+      setSelectedEmotion(targetEmotion);
+      setHistory(prev => [...prev, targetEmotion.id]);
+      speak(`¡Te ha tocado la ${targetEmotion.name}! ${targetEmotion.text}. ${targetEmotion.description}`);
+    }, 3000);
+  };
+
+  if (step === 'intro') {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in text-center py-8">
+        <div className="w-48 h-48 bg-purple-100 rounded-full flex items-center justify-center border-8 border-white shadow-xl">
+          <BookOpen size={80} className="text-purple-500" />
+        </div>
+        <div>
+          <h2 className="text-3xl font-black text-purple-800 mb-2">El Monstruo de Colores</h2>
+          <p className="text-lg text-purple-600 font-medium">¿Quieres escuchar su historia y jugar con la ruleta?</p>
+        </div>
+        <Button variant="magic" className="w-full py-4 text-xl" onClick={() => {
+          setStep('story');
+          speak(storyText);
+        }}>
+          ¡Sí, vamos!
+        </Button>
+      </div>
+    );
+  }
+
+  if (step === 'story') {
+    return (
+      <div className="space-y-6 animate-fade-in">
+        <div className="bg-white p-8 rounded-3xl shadow-lg border-2 border-purple-100 text-center relative">
+          <AudioButton text={storyText} className="absolute top-4 right-4" />
+          <div className="text-6xl mb-6 animate-bounce-slow">👾</div>
+          <h2 className="text-2xl font-black text-purple-800 mb-4">El Cuento del Monstruo</h2>
+          <p className="text-lg text-gray-700 leading-relaxed text-left font-medium">
+            {storyText}
+          </p>
+          <Button variant="primary" className="mt-8 w-full" onClick={() => {
+            window.speechSynthesis.cancel();
+            setStep('roulette');
+          }}>
+            ¡Ahora juguemos a la Ruleta!
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-8 animate-fade-in text-center">
+      <div>
+        <h2 className="text-2xl font-black text-purple-800 flex items-center justify-center gap-2">
+          <RotateCw className={spinning ? 'animate-spin' : ''} /> Ruleta de Emociones
+        </h2>
+        <p className="text-gray-600 font-medium mt-1">¡Gira la flecha y cuéntale a Lú qué te hace sentir así!</p>
+      </div>
+
+      <div className="relative w-72 h-72 mx-auto mt-8">
+        {/* La Ruleta */}
+        <div 
+          className="w-full h-full rounded-full border-8 border-gray-800 shadow-2xl relative overflow-hidden transition-transform duration-[3000ms] ease-out"
+          style={{ transform: `rotate(${rotation}deg)` }}
+        >
+          {emotions.map((emo, i) => (
+            <div 
+              key={emo.id}
+              className={`absolute top-0 left-1/2 w-1/2 h-1/2 origin-bottom-left ${emo.color}`}
+              style={{ 
+                transform: `rotate(${i * 60}deg) skewY(-30deg)`,
+                border: '1px solid rgba(0,0,0,0.1)'
+              }}
+            >
+              <div className="absolute bottom-4 left-4 transform rotate-[45deg] skewY(30deg) text-3xl">
+                {emo.icon}
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* La Flecha */}
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+          <div className="w-8 h-12 bg-gray-800 clip-path-arrow shadow-md"></div>
+        </div>
+        
+        {/* Centro */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full border-4 border-gray-800 z-10 shadow-sm flex items-center justify-center">
+          <div className="w-2 h-2 bg-gray-800 rounded-full"></div>
+        </div>
+      </div>
+
+      <div className="px-4">
+        <Button 
+          variant="magic" 
+          className="w-full py-4 text-2xl shadow-xl flex items-center justify-center gap-3"
+          onClick={spinRoulette}
+          disabled={spinning}
+        >
+          {spinning ? '¡Girando...!' : '¡Toca para Girar!'} <RotateCw size={24} />
+        </Button>
+      </div>
+
+      {selectedEmotion && !spinning && (
+        <div className={`mt-6 p-6 rounded-3xl shadow-lg border-b-4 animate-slide-up text-white ${selectedEmotion.color} border-black/10`}>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <span className="text-4xl">{selectedEmotion.icon}</span>
+            <h3 className="text-2xl font-black">{selectedEmotion.name}</h3>
+          </div>
+          <p className="text-lg font-bold opacity-90 mb-3">{selectedEmotion.text}</p>
+          <div className="bg-white/20 p-4 rounded-2xl">
+            <p className="text-sm font-medium leading-relaxed">
+              {selectedEmotion.description}
+              <br/><br/>
+              <span className="font-black text-white underline decoration-2">¿Alguna vez te has sentido así? ¡Cuéntale a tu amiga psicóloga!</span>
+            </p>
+          </div>
+          <AudioButton 
+            text={`${selectedEmotion.name}. ${selectedEmotion.text}. ${selectedEmotion.description}. ¿Alguna vez te has sentido así? ¡Cuéntale a tu amiga psicóloga!`} 
+            colorClass="bg-white/20 text-white mt-4 mx-auto" 
+          />
+        </div>
+      )}
+
+      <style dangerouslySetInnerHTML={{__html: `
+        .clip-path-arrow {
+          clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+          transform: rotate(180deg);
+        }
+      `}} />
+    </div>
+  );
+};
+
+
 // 0. Vista: Landing Page (Intro)
 const LandingView = ({ setTab }) => {
   const videoRef = React.useRef(null);
