@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import luVideo from './assets/be_ae_b_e_afb_c_b_a_bmp_.mp4';
 import rouletteImg from './assets/WhatsApp Image 2026-04-28 at 7.49.31 PM.jpeg';
+import monsterSprites from './assets/Gemini_Generated_Image_kfsx50kfsx50kfsx.png';
 
 // --- Utilidad de Voz (Text-to-Speech) ---
 let selectedVoice = null;
@@ -468,12 +469,12 @@ const MonsterView = () => {
   const [history, setHistory] = useState([]);
 
   const emotions = [
-    { id: 1, name: 'Alegría', color: 'bg-yellow-400', text: 'Amarillo como el sol. ¡Brilla con mucha fuerza!', icon: '😊', description: '¡Qué felicidad! Sientes ganas de saltar, bailar y jugar.' },
-    { id: 2, name: 'Tristeza', color: 'bg-blue-400', text: 'Azul como el mar. Suave y dulce.', icon: '😢', description: 'Está bien estar triste. Es como un día de lluvia.' },
-    { id: 3, name: 'Rabia', color: 'bg-red-500', text: 'Roja como el fuego. Feroz y ardiente.', icon: '😡', description: '¡Uff! Quieres gritar y soltar todo ese fuego.' },
-    { id: 4, name: 'Miedo', color: 'bg-gray-600', text: 'Negro y oscuro. Se esconde en las sombras.', icon: '😨', description: 'El miedo nos hace sentir pequeños, pero Lú te acompaña.' },
-    { id: 5, name: 'Calma', color: 'bg-green-400', text: 'Verde como las hojas de los árboles.', icon: '😌', description: 'Respiras poco a poco y profundamente. Todo está en paz.' },
-    { id: 6, name: 'Amor', color: 'bg-pink-400', text: 'Rosa y dulce. ¡Un gran abrazo!', icon: '💖', description: '¡Qué bonito! Te sientes querido y con ganas de dar amor.' }
+    { id: 1, name: 'Alegría', color: 'bg-yellow-400', text: 'Amarillo como el sol. ¡Brilla con mucha fuerza!', pos: '0% 0%', description: '¡Qué felicidad! Sientes ganas de saltar, bailar y jugar.' },
+    { id: 2, name: 'Tristeza', color: 'bg-blue-400', text: 'Azul como el mar. Suave y dulce.', pos: '50% 100%', description: 'Está bien estar triste. Es como un día de lluvia.' },
+    { id: 3, name: 'Rabia', color: 'bg-red-500', text: 'Roja como el fuego. Feroz y ardiente.', pos: '100% 0%', description: '¡Uff! Quieres gritar y soltar todo ese fuego.' },
+    { id: 4, name: 'Miedo', color: 'bg-gray-600', text: 'Negro y oscuro. Se esconde en las sombras.', pos: '50% 0%', description: 'El miedo nos hace sentir pequeños, pero Lú te acompaña.' },
+    { id: 5, name: 'Calma', color: 'bg-green-400', text: 'Verde como las hojas de los árboles.', pos: '0% 100%', description: 'Respiras poco a poco y profundamente. Todo está en paz.' },
+    { id: 6, name: 'Amor', color: 'bg-pink-400', text: 'Rosa y dulce. ¡Un gran abrazo!', pos: '100% 100%', description: '¡Qué bonito! Te sientes querido y con ganas de dar amor.' }
   ];
 
   const storyText = "¡Hola! Soy Lú el Búho. Hoy te contaré una historia especial. Había una vez un monstruo que se despertó muy confundido; sus emociones estaban todas mezcladas y no sabía qué le pasaba. Su amiga le enseñó que cada sentimiento tiene un color: la alegría es amarilla como el sol, la tristeza es azul como el mar, la rabia es roja y feroz como el fuego, el miedo es negro y se esconde en la oscuridad, y la calma es verde, tranquila como los árboles. Al poner cada emoción en su propio bote, el monstruo se sintió mucho mejor. ¡Incluso descubrió un nuevo color, el rosa, que es el del amor! Recuerda: cuando ordenas lo que sientes, todo es más fácil. ¿Cómo te sientes tú hoy?";
@@ -582,8 +583,15 @@ const MonsterView = () => {
                 border: '1px solid rgba(0,0,0,0.1)'
               }}
             >
-              <div className="absolute bottom-4 left-4 transform rotate-[45deg] skewY(30deg) text-3xl">
-                {emo.icon}
+              <div className="absolute bottom-2 left-2 transform rotate-[45deg] skewY(30deg) w-12 h-12">
+                <div 
+                  className="w-full h-full bg-no-repeat border-2 border-white/50 rounded-lg shadow-sm"
+                  style={{ 
+                    backgroundImage: `url(${monsterSprites})`,
+                    backgroundPosition: emo.pos,
+                    backgroundSize: '300% 200%'
+                  }}
+                />
               </div>
             </div>
           ))}
@@ -613,9 +621,16 @@ const MonsterView = () => {
 
       {selectedEmotion && !spinning && (
         <div className={`mt-6 p-6 rounded-3xl shadow-lg border-b-4 animate-slide-up text-white ${selectedEmotion.color} border-black/10`}>
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <span className="text-4xl">{selectedEmotion.icon}</span>
-            <h3 className="text-2xl font-black">{selectedEmotion.name}</h3>
+          <div className="flex items-center justify-center gap-4 mb-3">
+            <div 
+              className="w-20 h-20 bg-white rounded-2xl border-4 border-white/30 shadow-inner overflow-hidden"
+              style={{ 
+                backgroundImage: `url(${monsterSprites})`,
+                backgroundPosition: selectedEmotion.pos,
+                backgroundSize: '300% 200%'
+              }}
+            />
+            <h3 className="text-3xl font-black uppercase tracking-wider">{selectedEmotion.name}</h3>
           </div>
           <p className="text-lg font-bold opacity-90 mb-3">{selectedEmotion.text}</p>
           <div className="bg-white/20 p-4 rounded-2xl">
